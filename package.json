@@ -1,0 +1,22 @@
+{
+  "name": "petshop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Igor-Lira/petshop.git"
+  },
+  "author": "Igor Lira",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Igor-Lira/petshop/issues"
+  },
+  "homepage": "https://github.com/Igor-Lira/petshop#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
