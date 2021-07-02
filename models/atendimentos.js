@@ -28,7 +28,7 @@ class Atendimento {
             if (err){
                 res.status(400).json(err)
             }else{
-                res.json(resultados)
+                res.json(atendimento)
             }
 
 
@@ -37,6 +37,61 @@ class Atendimento {
         }
 
     }
+
+    lista (res) {
+        const sql = 'SELECT * FROM Atendimentos'
+
+        conexao.query (sql, (err,resultados) =>{
+            if (err){
+                res.status(400).json(err)
+            }else{
+                res.status(200).json(resultados)
+            }
+
+        })
+
+    }
+    buscaPorId(id, res){
+        const sql = `SELECT * FROM Atendimentos WHERE id =${id}`
+
+        conexao.query(sql, (err, resultados) => {
+            const atendimento = resultados[0]
+            if(err) {
+                res.status(400).json(err)
+            }else{
+                res.status(200).json(atendimento)
+            }
+        })
+    }
+
+    altera(id, valores, res){
+        const sql = 'UPDATE Atendimentos SET ? WHERE id=?'
+        if(valores.data){
+            valores.data = moment(valores.data, 'DD/MM/YYYY').format('YYYY-MM-DD HH:mm:ss')
+        }
+        conexao.query(sql, [valores, id], (err, resultados) =>{
+
+            if(err){
+                res.status(400).json(err)
+            } else{
+                res.status(200).json({...valores, id})
+            }
+        })
+    }
+
+    deleta(id, res){
+
+        const sql = `DELETE FROM Atendimentos WHERE id = ?`
+
+        conexao.query (sql, id,  (err, resultados) => {
+            if (err){
+                res.status(400).json(err)
+            }else{
+                res.status(200).json({id})
+            }
+        })
+    }
+
 }
 
 module.exports = new Atendimento
